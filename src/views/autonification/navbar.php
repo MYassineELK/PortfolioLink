@@ -36,8 +36,8 @@
                                     $us = $user->find($_SESSION["email"]);
                                 }
                                 ?>
-                                <img src="src\assets\images\<?php if (isset($us["image"]) && $us["image"] != "") {
-                                                echo $us["image"];
+                                <img src="src\assets\images\<?php if (isset($us["photo_url"]) && $us["photo_url"] != "") {
+                                                echo $us["photo_url"];
                                             } ?>" alt="">
                     <svg width="16" height="16" fill="none" stroke="var(--muted2)" stroke-width="2" viewBox="0 0 24 24">
                         <circle cx="12" cy="8" r="4" />

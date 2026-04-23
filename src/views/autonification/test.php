@@ -746,10 +746,10 @@ session_start();
 <body>
 
     <!-- NAV -->
-     <?php
-     include_once "navbar.php" ;
+    <?php
+    include_once "navbar.php";
 
-?>
+    ?>
 
     <!-- MAIN -->
     <div class="main">
@@ -777,20 +777,28 @@ session_start();
 
                 <!-- Preview Card -->
                 <div class="pcard">
+                    <?php if (isset($_SESSION["email"])) {
+                        require_once __DIR__ . '/../../model/user.php';
+                        require_once __DIR__ . '/../../core/Database.php';
+                        $user = new User($pdo, "yassin", "elk", "elk", 'elk', "p");
+                        $u = $user->findetd($_SESSION["email"]);
+                    }
+                    ?>
+
                     <div class="pcard-banner"></div>
                     <div class="pcard-body">
                         <div style="display:flex;justify-content:space-between;align-items:flex-start">
                             <div class="pcard-av" id="pvAv">
-                               <?php  if (isset($_SESSION["email"])) {
+                                <?php if (isset($_SESSION["email"])) {
                                     require_once __DIR__ . '/../../model/user.php';
                                     require_once __DIR__ . '/../../core/Database.php';
                                     $user = new User($pdo, "yassin", "elk", "elk", 'elk', "p");
                                     $us = $user->find($_SESSION["email"]);
                                 }
                                 ?>
-                                <img src="src\assets\images\<?php if (isset($us["image"]) && $us["image"] != "") {
-                                                echo $us["image"];
-                                            } ?>" alt="">
+                                <img src="src\assets\images\<?php if (isset($us["photo_url"]) && $us["photo_url"] != "") {
+                                                                echo $us["photo_url"];
+                                                            } ?>" alt="">
                                 <svg width="2" height="24" fill="none" stroke="var(--muted)" stroke-width="1.8" viewBox="0 0 24 24">
                                     <circle cx="12" cy="8" r="4" />
                                     <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
@@ -799,8 +807,8 @@ session_start();
                             <div style="margin-top:10px"><span class="pro-pill">PRO</span></div>
                         </div>
                         <div style="margin-top:12px">
-                            <p style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;line-height:1.2" id="pvName">Alex Rivers</p>
-                            <p style="font-size:12px;color:var(--muted2);margin-top:3px" id="pvRole">Computer Science Student</p>
+                            <p style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;line-height:1.2" id="pvName"><?= $u['nom'] . " " . $u['prenom'] ?></p>
+                            <p style="font-size:12px;color:var(--muted2);margin-top:3px" id="pvRole"><?= $u['filiere'] ?></p>
                         </div>
                         <div style="margin-top:10px;display:flex;flex-direction:column;gap:5px">
                             <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)">
@@ -808,16 +816,16 @@ session_start();
                                     <path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" />
                                     <circle cx="12" cy="11" r="3" />
                                 </svg>
-                                <span id="pvLoc">San Francisco, CA</span>
+                                <span id="pvLoc"><?= $u['ville'] ?></span>
                             </div>
                             <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)">
                                 <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                     <path d="M12 14l9-5-9-5-9 5 9 5z" />
                                 </svg>
-                                <span id="pvUni">Tech Institute of Technology</span>
+                                <span id="pvUni"><?= $u['etablissement'] ?></span>
                             </div>
                         </div>
-                        <p style="font-size:11px;color:var(--muted2);font-style:italic;margin-top:11px;line-height:1.65" id="pvBio">"Passionate about AI and full-stack development. Looking for research opportunities in LLMs."</p>
+                        <p style="font-size:11px;color:var(--muted2);font-style:italic;margin-top:11px;line-height:1.65" id="pvBio"><?= $u['bio'] ?></p>
                         <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:11px" id="pvChips">
                             <span class="chip">Python</span>
                             <span class="chip">React</span>
@@ -853,7 +861,7 @@ session_start();
                     <div class="cp">
                         <div class="sec-hd">
                             <div class="sec-icon">
-                             <img src="" alt="">
+                                <img src="" alt="">
                                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                     <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
@@ -864,16 +872,16 @@ session_start();
                             <div style="display:flex;align-items:center;gap:22px">
                                 <div class="av-wrap">
                                     <div class="av-circle" id="avDisp" onclick="document.getElementById('imgIn').click()">
-                                       <?php  if (isset($_SESSION["email"])) {
-                                    require_once __DIR__ . '/../../model/user.php';
-                                    require_once __DIR__ . '/../../core/Database.php';
-                                    $user = new User($pdo, "yassin", "elk", "elk", 'elk', "p");
-                                    $us = $user->find($_SESSION["email"]);
-                                }
-                                ?>
-                                <img src="src\assets\images\<?php if (isset($us["image"]) && $us["image"] != "") {
-                                                echo $us["image"];
-                                            } ?>" alt="">
+                                        <?php if (isset($_SESSION["email"])) {
+                                            require_once __DIR__ . '/../../model/user.php';
+                                            require_once __DIR__ . '/../../core/Database.php';
+                                            $user = new User($pdo, "yassin", "elk", "elk", 'elk', "p");
+                                            $us = $user->find($_SESSION["email"]);
+                                        }
+                                        ?>
+                                        <img src="src\assets\images\<?php if (isset($us["photo_url"]) && $us["photo_url"] != "") {
+                                                                        echo $us["photo_url"];
+                                                                    } ?>" alt="">
                                         <svg width="34" height="34" fill="none" stroke="var(--muted)" stroke-width="1.5" viewBox="0 0 24 24">
                                             <circle cx="12" cy="8" r="4" />
                                             <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
@@ -886,11 +894,11 @@ session_start();
                                     </div>
                                     <input type="file" id="imgIn" name="image" accept="image/*" style="display:none" onchange="onImg(event)" />
                                 </div>
-                               
+
                                 <div>
                                     <div style="display:flex;gap:8px;margin-bottom:9px">
-                                         <input type="submit" value="Add New" style="cursor:pointer;font-size:12.5px;padding:9px 18px" class="btn-p" >
-                                        <label for="imgIn"  ></label>
+                                        <input type="submit" value="Add New" style="cursor:pointer;font-size:12.5px;padding:9px 18px" class="btn-p">
+                                        <label for="imgIn"></label>
                                         <button class="btn-g" style="font-size:12.5px;padding:9px 15px" onclick="rmImg()">Remove</button>
                                     </div>
                                     <p style="font-size:11.5px;color:var(--muted);line-height:1.6">JPG, GIF or PNG. Max size 2MB.<br>Recommended 400×400px.</p>
@@ -913,21 +921,30 @@ session_start();
                         </div>
                         <form action="index.php?action=sive_info" method="post">
                             <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+                                <?php if (isset($_SESSION["email"])) {
+                                    require_once __DIR__ . '/../../model/user.php';
+                                    require_once __DIR__ . '/../../core/Database.php';
+                                    $user = new User($pdo, "yassin", "elk", "elk", 'elk', "p");
+                                    $us = $user->findetd($_SESSION["email"]);
+                                   
+                                }
+                                ?>
+
                                 <div>
                                     <label class="flabel">Full Name</label>
-                                    <input class="finp" name="fName" id="fName" value="Alex Rivers" oninput="sync()" placeholder="Your full name" />
+                                    <input class="finp" name="fName" id="fName" value="<?= $us['nom'] . " " . $us['prenom'] ?>" oninput="sync()" placeholder="Your full name" />
                                 </div>
                                 <div>
                                     <label class="flabel">Education sector</label>
-                                    <input class="finp" name="fRole" id="fRole" value="Computer Science Student" oninput="sync()" placeholder="e.g. CS Student" />
+                                    <input class="finp" name="fRole" id="fRole" value="<?= $us['filiere'] ?>" oninput="sync()" placeholder="e.g. CS Student" />
                                 </div>
                                 <div style="grid-column:1/-1">
                                     <label class="flabel">University / Institution</label>
-                                    <input class="finp" name="fUni" id="fUni" value="Tech Institute of Technology" oninput="sync()" placeholder="Your institution" />
+                                    <input class="finp" name="fUni" id="fUni" value="<?= $us['etablissement'] ?>" oninput="sync()" placeholder="Your institution" />
                                 </div>
                                 <div style="grid-column:1/-1">
                                     <label class="flabel">Bio Summary</label>
-                                    <textarea class="finp" id="fBio" name="Bio" rows="4" oninput="sync()" placeholder="Tell recruiters about yourself...">Passionate about AI and full-stack development. Looking for research opportunities in LLMs.</textarea>
+                                    <textarea class="finp" id="fBio" name="Bio" rows="4" oninput="sync()" placeholder="Tell recruiters about yourself..."><?= $us['bio'] ?></textarea>
                                 </div>
                             </div>
 
@@ -936,7 +953,7 @@ session_start();
                                 <p style="font-size:12px;color:var(--muted)">Unsaved changes will be lost if you leave.</p>
                                 <div style="display:flex;gap:8px">
                                     <button class="btn-g" onclick="discard()">Discard</button>
-                                    <button class="btn-p" type="submit" >Save Changes</button>
+                                    <button class="btn-p" type="submit">Save Changes</button>
                                 </div>
                             </div>
                         </form>
@@ -963,22 +980,24 @@ session_start();
                                 Share Link
                             </button>
                         </div>
-
-                        <div class="drop-zone" id="dz"
-                            onclick="document.getElementById('cvIn').click()"
-                            ondragover="ev=>{ev.preventDefault();document.getElementById('dz').classList.add('drag')}"
-                            ondragleave="()=>document.getElementById('dz').classList.remove('drag')"
-                            ondrop="onDrop(event)">
-                            <input type="file" id="cvIn" accept=".pdf,.doc,.docx" style="display:none" onchange="beginProg()" />
-                            <div class="drop-icon">
-                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                                </svg>
+                        <form action="index.php?action=uploud_cv" id="fcv" method="post" enctype="multipart/form-data">
+                            <div class="drop-zone" id="dz"
+                                onclick="document.getElementById('cvIn').click()"
+                                ondragover="ev=>{ev.preventDefault();document.getElementById('dz').classList.add('drag')}"
+                                ondragleave="()=>document.getElementById('dz').classList.remove('drag')"
+                                ondrop="onDrop(event)">
+                                <input type="file" id="cvIn" name="cv" accept=".pdf,.doc,.docx" style="display:none" onchange="beginProg()" />
+                                <div class="drop-icon">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                    </svg>
+                                </div>
+                                <p style="font-size:14px;font-weight:600;font-family:'Syne',sans-serif;margin-bottom:5px">Drag and drop your CV here</p>
+                                <p style="font-size:12.5px;color:var(--muted);margin-bottom:14px">We'll automatically extract your skills and projects.</p>
+                                <span style="font-size:13px;color:rgba(147,197,253,1);font-weight:500;border-bottom:1px solid rgba(147,197,253,0.35);padding-bottom:1px">Or browse files</span>
                             </div>
-                            <p style="font-size:14px;font-weight:600;font-family:'Syne',sans-serif;margin-bottom:5px">Drag and drop your CV here</p>
-                            <p style="font-size:12.5px;color:var(--muted);margin-bottom:14px">We'll automatically extract your skills and projects.</p>
-                            <span style="font-size:13px;color:rgba(147,197,253,1);font-weight:500;border-bottom:1px solid rgba(147,197,253,0.35);padding-bottom:1px">Or browse files</span>
-                        </div>
+                            
+                       
 
                         <!-- Progress area -->
                         <div id="progArea" style="display:none;margin-top:18px">
@@ -1008,8 +1027,18 @@ session_start();
                                     <span style="color:var(--muted)" id="sl3">DONE</span>
                                 </div>
                             </div>
+                            <div style="display:flex;align-items:center;justify-content:space-between">
+                                <p style="font-size:12px;color:var(--muted)">Unsaved changes will be lost if you leave.</p>
+                                <div style="display:flex;gap:8px">
+                                    <button class="btn-g" type="reset">Discard</button>
+                                    <button class="btn-p" type="submit">Save cv</button>
+                                </div>
+                            </div>
                         </div>
+                     
+                        </form>
                     </div>
+                     
                 </div>
 
                 <!-- ─── SOCIAL LINKS ─── -->
@@ -1072,7 +1101,6 @@ session_start();
         </div>
         <span id="toastTxt">Saved!</span>
     </div>
-
     <script>
         const D = {
             name: 'Alex Rivers',
@@ -1132,6 +1160,8 @@ session_start();
                 document.getElementById('pPct').textContent = p + '%';
                 document.getElementById('pFill').style.width = p + '%';
             }, 80);
+
+
         }
 
         function endProg() {

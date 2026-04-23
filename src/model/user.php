@@ -80,6 +80,12 @@ class User
         $user->execute([$email]);
         return $user->fetch(PDO::FETCH_ASSOC);
     }
+    public function findetd(string $email)
+    {
+        $user = $this->pdo->prepare("SELECT * FROM `v_student_public_profile` WHERE email=?  ");
+        $user->execute([$email]);
+        return $user->fetch(PDO::FETCH_ASSOC);
+    }
 
     public function edit_complate(int $id, array $fields)
     {
@@ -118,7 +124,7 @@ class User
         $u->execute([$id]);
 
         if ($u->fetch()) {
-            $up = $this->pdo->prepare("UPDATE users SET image = ? WHERE id = ?");
+            $up = $this->pdo->prepare("UPDATE users SET photo_url = ? WHERE id = ?");
 
             if ($up->execute([$image, $id])) {
                 echo "valid";
@@ -127,6 +133,24 @@ class User
             }
         } else {
             echo "not valid";
+        }
+    }
+     public function uplode_cv(int $id, string $cv)
+    {
+        $u = $this->pdo->prepare("SELECT * FROM users WHERE id = ?");
+        $u->execute([$id]);
+
+        if ($u->fetch()) {
+            $up = $this->pdo->prepare("UPDATE `student_profiles` SET `cv_url`=? WHERE student_id=?");
+
+            if ($up->execute([$cv, $id])) {
+                exit();
+            } else {
+                echo "error during update";
+            }
+        } else {
+            echo "not valid";
+            exit();
         }
     }
 

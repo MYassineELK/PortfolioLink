@@ -9,7 +9,8 @@ class User_controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user = new User($pdo, $_POST['First_Name'], $_POST['Last_Name'], $_POST['Email'], $_POST['Password'], $_POST['role']);
             $user->create();
-            $us = $user->find($_POST['email']);
+            var_dump($_POST);
+            $us = $user->find($_POST['Email']);
             session_start();
     $               $_SESSION["user_id"] = $us['id'];
                     $_SESSION["email"] = $us['email'];
@@ -27,12 +28,12 @@ class User_controller
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            if (empty($_POST['email']) || empty($_POST['pwd'])) {
+            if (empty($_POST['Email']) || empty($_POST['pwd'])) {
                 header("Location: index.php?action=p_login&msg=champs vides");
                 exit();
             }
-            $user = new User($pdo, "yassin", "elk", $_POST['email'], $_POST['pwd'], "p");
-            $us = $user->find($_POST['email']);
+            $user = new User($pdo, "yassin", "elk", $_POST['Email'], $_POST['pwd'], "p");
+            $us = $user->find($_POST['Email']);
 
             if ($us) {
                 if (password_verify($_POST['pwd'], $us["password_hash"])) {
@@ -73,6 +74,28 @@ class User_controller
                 $user->uplode_image($us["id"], $image_name);
             }
 
+            header("Location: index.php?action=test");
+            exit();
+        }
+    }
+    public static function aploade_cv()
+    {
+
+        require_once __DIR__ . '/../model/user.php';
+        require_once __DIR__ . '/../core/Database.php';
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user = new User($pdo, "yassin", "elk", "yassin", "elk", "p");
+            session_start();
+            $us = $user->find($_SESSION["email"]);
+
+            if (isset($_FILES['cv']) && $_FILES['cv']['error'] === 0) {
+                $upload_dir = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'cvs' . DIRECTORY_SEPARATOR;            // تأمين اسم الملف باستخدام طابع زمني لمنع التكرار 
+                $cv_name = time() . "_" . $_FILES['cv']['name'];
+                $target_path = $upload_dir . $cv_name;
+
+                move_uploaded_file($_FILES['cv']['tmp_name'], $target_path);
+                $user->uplode_cv($us["id"], $cv_name);
+            }
             header("Location: index.php?action=test");
             exit();
         }

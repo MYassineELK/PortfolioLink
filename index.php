@@ -11,6 +11,9 @@ switch($action) {
       case 'sive_info':
         User_controller::update_Personal_Information(); 
         break;
+         case 'uploud_cv':
+        User_controller::aploade_cv(); 
+        break;
     case 'test':
         include("./src/views/autonification/test.php");
         break;
