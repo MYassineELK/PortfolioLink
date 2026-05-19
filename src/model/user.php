@@ -108,13 +108,13 @@ class User
         $u = $this->pdo->prepare("select * from student_profiles where student_id=?");
         $u->execute([$id]);
         if (!empty($u->fetch())) {
-            $up = $this->pdo->prepare("UPDATE `student_profiles` SET `filiere`=?,`etablissement`=?,`bio`=?,`updated_at`=? WHERE student_id=?");
-            $up->execute([$fields[1], $fields[2], $fields[3], date("Y-m-d H:i:s"), $id]);
+            $up = $this->pdo->prepare("UPDATE `student_profiles` SET `filiere`=?,`etablissement`=?,`bio`=?,ville=?,`updated_at`=? WHERE student_id=?");
+            $up->execute([$fields[1], $fields[2], $fields[3], $fields[4], date("Y-m-d H:i:s"), $id]);
         } else {
             $up = $this->pdo->prepare("INSERT INTO 
            `student_profiles`(`student_id`, `filiere`, `annee_etude`, `etablissement`, `ville`, `bio`, `cv_url`, `portfolio_url`, `disponibilite`, `updated_at`) 
-           VALUES (?,?,1,?,'[value-5]',?,'[value-7]','[value-8]','[value-9]',?)");
-            $up->execute([$id, $fields[1], $fields[2], $fields[3], date("Y-m-d H:i:s")]);
+           VALUES (?,?,1,?,?,?,'[value-7]','[value-8]','[value-9]',?)");
+            $up->execute([$id, $fields[1], $fields[2], $fields[3], $fields[4], date("Y-m-d H:i:s")]);
         }
     }
 

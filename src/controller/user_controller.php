@@ -114,7 +114,7 @@ class User_controller
             $user = new User($pdo, "yassin", "elk", "yassin", "elk", "p");
             session_start();
             $u = $user->find($_SESSION["email"]);
-            $arr = [$_POST['fName'], $_POST['fRole'], $_POST['fUni'], $_POST['Bio']];
+            $arr = [$_POST['fName'], $_POST['fRole'], $_POST['fUni'], $_POST['Bio'],$_POST['ville']];
 
             if ($u && isset($_POST)) {
                 $user->edit_Personal_Information($u["id"], $arr);

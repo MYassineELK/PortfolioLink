@@ -36,749 +36,21 @@ if (isset($_POST['generate_bio'])) {
     <title>PortfolioLink – Edit Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0
-        }
+    <link rel="stylesheet" href="src/assets/css/stayle_seting.css">
+    <script src="src/assets/js/js_setiong.js"></script>
 
-        :root {
-            --bg: #090c14;
-            --surface: #0d1119;
-            --card: #111827;
-            --card2: #0f1623;
-            --border: #1a2640;
-            --border2: #223052;
-            --accent: #3b82f6;
-            --accent-dim: rgba(59, 130, 246, 0.12);
-            --accent-glow: rgba(59, 130, 246, 0.18);
-            --text: #ddeaf8;
-            --muted: #4d6a8e;
-            --muted2: #7a9abf;
-            --green: #22c55e;
-            --green-dim: rgba(34, 197, 94, 0.12);
-        }
-
-        body {
-            background: var(--bg);
-            font-family: 'Inter', sans-serif;
-            color: var(--text);
-            min-height: 100vh;
-            overflow-x: hidden
-        }
-
-        h1,
-        h2,
-        .syne {
-            font-family: 'Syne', sans-serif
-        }
-
-        /* subtle dot grid bg */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image: radial-gradient(circle, rgba(59, 130, 246, 0.06) 1px, transparent 1px);
-            background-size: 28px 28px;
-            pointer-events: none;
-            z-index: 0
-        }
-
-        /* NAV */
-        .nav {
-            background: rgba(9, 12, 20, 0.9);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100
-        }
-
-        .nav-inner {
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 0 28px;
-            height: 58px;
-            display: flex;
-            align-items: center;
-            gap: 28px
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-            text-decoration: none
-        }
-
-        .logo-mark {
-            width: 32px;
-            height: 32px;
-            border-radius: 9px;
-            background: var(--accent);
-            display: flex;
-            align-items: center;
-            justify-content: center
-        }
-
-        .logo-text {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 17px;
-            color: var(--text);
-            letter-spacing: -.3px
-        }
-
-        .search-wrap {
-            flex: 1;
-            max-width: 280px;
-            background: rgba(17, 24, 39, 0.9);
-            border: 1px solid var(--border);
-            border-radius: 9px;
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            padding: 8px 14px;
-            transition: all .2s
-        }
-
-        .search-wrap:focus-within {
-            border-color: rgba(59, 130, 246, 0.5);
-            background: rgba(59, 130, 246, 0.04)
-        }
-
-        .search-wrap input {
-            background: none;
-            border: none;
-            outline: none;
-            color: var(--text);
-            font-size: 13px;
-            width: 100%;
-            font-family: 'Inter', sans-serif
-        }
-
-        .search-wrap input::placeholder {
-            color: var(--muted)
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-left: auto
-        }
-
-        .nav-lnk {
-            color: var(--muted2);
-            font-size: 13.5px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: color .2s;
-            letter-spacing: .01em
-        }
-
-        .nav-lnk:hover {
-            color: var(--text)
-        }
-
-        .icon-btn {
-            position: relative;
-            display: flex;
-            align-items: center;
-            color: var(--muted2);
-            cursor: pointer;
-            transition: color .2s
-        }
-
-        .icon-btn:hover {
-            color: var(--text)
-        }
-
-        .notif-pip {
-            width: 7px;
-            height: 7px;
-            background: var(--accent);
-            border-radius: 50%;
-            border: 2px solid var(--bg);
-            position: absolute;
-            top: -1px;
-            right: -1px
-        }
-
-        .user-pill {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            border: 1.5px solid var(--border2);
-            background: rgba(30, 45, 71, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            overflow: hidden;
-            transition: border-color .2s
-        }
-
-        .user-pill:hover {
-            border-color: rgba(59, 130, 246, 0.5)
-        }
-
-        /* MAIN CONTAINER */
-        .main {
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 0 28px 72px;
-            position: relative;
-            z-index: 1
-        }
-
-        /* BREADCRUMB */
-        .bc {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 12.5px;
-            color: var(--muted);
-            padding: 20px 0 28px
-        }
-
-        .bc a {
-            color: var(--muted);
-            text-decoration: none;
-            transition: color .2s
-        }
-
-        .bc a:hover {
-            color: var(--muted2)
-        }
-
-        .bc .cur {
-            color: var(--accent);
-            font-weight: 500
-        }
-
-        /* GRID */
-        .page-grid {
-            display: grid;
-            grid-template-columns: 292px 1fr;
-            gap: 24px;
-            align-items: start
-        }
-
-        /* SIDEBAR */
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            position: sticky;
-            top: 74px
-        }
-
-        .sidebar-label {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 4px
-        }
-
-        .sidebar-label span:first-child {
-            font-size: 10.5px;
-            font-weight: 700;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-            color: var(--muted)
-        }
-
-        .live-dot {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 11px;
-            color: var(--green)
-        }
-
-        .live-dot::before {
-            content: '';
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--green);
-            animation: pulse 2s infinite
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1
-            }
-
-            50% {
-                opacity: .5
-            }
-        }
-
-        /* PREVIEW CARD */
-        .pcard {
-            background: linear-gradient(160deg, #101828 0%, #0d1420 100%);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            overflow: hidden
-        }
-
-        .pcard-banner {
-            height: 70px;
-            background: linear-gradient(135deg, #0c1e3f 0%, #091629 60%, #0e2242 100%);
-            position: relative;
-            overflow: hidden
-        }
-
-        .pcard-banner::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(60deg, transparent, transparent 18px, rgba(59, 130, 246, 0.04) 18px, rgba(59, 130, 246, 0.04) 19px)
-        }
-
-        .pcard-banner::before {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: -20px;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: rgba(59, 130, 246, 0.08)
-        }
-
-        .pcard-body {
-            padding: 0 18px 22px
-        }
-
-        .pcard-av {
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
-            border: 3px solid #0d1420;
-            background: #1a2a45;
-            margin-top: -29px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            z-index: 30;
-        }
-
-        .pro-pill {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            color: #fff;
-            font-family: 'Syne', sans-serif;
-            font-size: 9.5px;
-            font-weight: 700;
-            padding: 3px 9px;
-            border-radius: 5px;
-            letter-spacing: .07em
-        }
-
-        .chip {
-            background: rgba(26, 40, 65, 0.9);
-            border: 1px solid var(--border);
-            color: var(--muted2);
-            border-radius: 20px;
-            padding: 3px 11px;
-            font-size: 11px;
-            font-weight: 500
-        }
-
-        /* CARDS */
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            transition: border-color .25s
-        }
-
-        .card:hover {
-            border-color: var(--border2)
-        }
-
-        .cp {
-            padding: 26px
-        }
-
-        /* SECTION HEADER */
-        .sec-hd {
-            display: flex;
-            align-items: center;
-            gap: 11px;
-            margin-bottom: 24px
-        }
-
-        .sec-icon {
-            width: 34px;
-            height: 34px;
-            flex-shrink: 0;
-            border-radius: 9px;
-            background: var(--accent-dim);
-            border: 1px solid var(--accent-glow);
-            display: flex;
-            align-items: center;
-            justify-content: center
-        }
-
-        .sec-icon svg {
-            width: 15px;
-            height: 15px;
-            color: rgba(147, 197, 253, 1)
-        }
-
-        .sec-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 15px;
-            font-weight: 700;
-            letter-spacing: -.1px
-        }
-
-        /* FORM */
-        .flabel {
-            font-size: 10.5px;
-            font-weight: 700;
-            letter-spacing: .09em;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 7px;
-            display: block
-        }
-
-        .finp {
-            background: rgba(9, 12, 20, 0.8);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 11px 15px;
-            color: var(--text);
-            font-size: 13.5px;
-            width: 100%;
-            outline: none;
-            transition: all .25s;
-            font-family: 'Inter', sans-serif;
-            line-height: 1.5
-        }
-
-        .finp:focus {
-            border-color: rgba(59, 130, 246, 0.6);
-            background: rgba(59, 130, 246, 0.03);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.07)
-        }
-
-        .finp::placeholder {
-            color: var(--muted)
-        }
-
-        textarea.finp {
-            resize: none
-        }
-
-        /* BUTTONS */
-        .btn-p {
-            background: var(--accent);
-            color: #fff;
-            font-weight: 600;
-            font-size: 13px;
-            font-family: 'Inter', sans-serif;
-            border-radius: 9px;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            transition: all .22s;
-            letter-spacing: .01em
-        }
-
-        .btn-p:hover {
-            background: #2563eb;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3)
-        }
-
-        .btn-p:active {
-            transform: none;
-            box-shadow: none
-        }
-
-        .btn-g {
-            background: transparent;
-            color: var(--muted2);
-            font-size: 13px;
-            font-weight: 500;
-            font-family: 'Inter', sans-serif;
-            border-radius: 9px;
-            padding: 10px 18px;
-            border: 1px solid var(--border);
-            cursor: pointer;
-            transition: all .2s
-        }
-
-        .btn-g:hover {
-            border-color: var(--border2);
-            color: var(--text);
-            background: rgba(255, 255, 255, 0.02)
-        }
-
-        /* AVATAR */
-        .av-wrap {
-            position: relative;
-            width: 90px;
-            height: 90px;
-            flex-shrink: 0
-        }
-
-        .av-circle {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            border: 2px solid var(--border2);
-            background: rgba(26, 40, 65, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all .2s
-        }
-
-        .av-circle:hover {
-            border-color: rgba(59, 130, 246, 0.6)
-        }
-
-        .av-edit {
-            position: absolute;
-            bottom: 1px;
-            right: 1px;
-            width: 24px;
-            height: 24px;
-            background: var(--accent);
-            border-radius: 50%;
-            border: 2px solid var(--card);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform .2s
-        }
-
-        .av-edit:hover {
-            transform: scale(1.1)
-        }
-
-        .av-edit svg {
-            width: 10px;
-            height: 10px;
-            color: #fff
-        }
-
-        /* UPLOAD ZONE */
-        .drop-zone {
-            border: 1.5px dashed var(--border2);
-            border-radius: 12px;
-            background: rgba(9, 12, 20, 0.7);
-            padding: 40px 24px;
-            text-align: center;
-            cursor: pointer;
-            transition: all .25s
-        }
-
-        .drop-zone:hover,
-        .drop-zone.drag {
-            border-color: rgba(59, 130, 246, 0.6);
-            background: rgba(59, 130, 246, 0.04)
-        }
-
-        .drop-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            background: var(--accent-dim);
-            border: 1px solid var(--accent-glow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 14px
-        }
-
-        .drop-icon svg {
-            width: 22px;
-            height: 22px;
-            color: var(--accent)
-        }
-
-        /* PROGRESS */
-        .prog-bar {
-            height: 3px;
-            background: var(--border);
-            border-radius: 99px;
-            overflow: hidden;
-            margin-bottom: 12px
-        }
-
-        .prog-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), #93c5fd);
-            border-radius: 99px;
-            width: 0%;
-            transition: width .35s ease
-        }
-
-        .sdot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            flex-shrink: 0
-        }
-
-        .sdot-done {
-            background: var(--green)
-        }
-
-        .sdot-act {
-            background: var(--accent);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2)
-        }
-
-        .sdot-idle {
-            background: var(--border2)
-        }
-
-        /* SOCIAL ICON */
-        .soc-icon {
-            width: 40px;
-            height: 40px;
-            flex-shrink: 0;
-            border-radius: 10px;
-            background: rgba(9, 12, 20, 0.8);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: border-color .2s
-        }
-
-        .soc-icon:hover {
-            border-color: var(--border2)
-        }
-
-        .soc-icon svg {
-            width: 15px;
-            height: 15px;
-            color: var(--muted2)
-        }
-
-        /* DIVIDER */
-        .div {
-            height: 1px;
-            background: var(--border);
-            margin: 22px 0
-        }
-
-        /* INFO BOX */
-        .ibox {
-            background: rgba(59, 130, 246, 0.06);
-            border: 1px solid rgba(59, 130, 246, 0.16);
-            border-radius: 10px;
-            padding: 13px 15px;
-            font-size: 12px;
-            color: var(--muted2);
-            display: flex;
-            gap: 10px;
-            line-height: 1.6
-        }
-
-        .ibox svg {
-            width: 14px;
-            height: 14px;
-            color: rgba(147, 197, 253, 1);
-            flex-shrink: 0;
-            margin-top: 1px
-        }
-
-        /* TOAST */
-        .toast {
-            position: fixed;
-            bottom: 26px;
-            right: 26px;
-            background: var(--card2);
-            border: 1px solid var(--border2);
-            border-left: 3px solid var(--green);
-            color: var(--text);
-            border-radius: 12px;
-            padding: 14px 18px;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
-            transform: translateY(80px) scale(0.95);
-            opacity: 0;
-            transition: all .38s cubic-bezier(.34, 1.56, .64, 1);
-            z-index: 999
-        }
-
-        .toast.show {
-            transform: translateY(0) scale(1);
-            opacity: 1
-        }
-
-        .t-icon {
-            width: 22px;
-            height: 22px;
-            flex-shrink: 0;
-            border-radius: 50%;
-            background: var(--green-dim);
-            display: flex;
-            align-items: center;
-            justify-content: center
-        }
-
-        .t-icon svg {
-            width: 11px;
-            height: 11px;
-            color: var(--green)
-        }
-
-        ::-webkit-scrollbar {
-            width: 4px
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--surface)
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border2);
-            border-radius: 99px
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg)
-            }
-        }
-    </style>
 </head>
 
 <body>
 
-    <!-- NAV -->
     <?php
     include_once "navbar.php";
 
     ?>
 
-    <!-- MAIN -->
+
     <div class="main">
-        <!-- Breadcrumb -->
+    
         <div class="bc">
             <a href="#">Dashboard</a>
             <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -793,22 +65,15 @@ if (isset($_POST['generate_bio'])) {
 
         <div class="page-grid">
 
-            <!-- ─── SIDEBAR ─── -->
             <div class="sidebar">
                 <div class="sidebar-label">
                     <span>Live Preview</span>
                     <span class="live-dot">Synced</span>
                 </div>
 
-                <!-- Preview Card -->
+             
                 <div class="pcard">
-                    <?php if (isset($_SESSION["email"])) {
-                        require_once __DIR__ . '/../../model/user.php';
-                        require_once __DIR__ . '/../../core/Database.php';
-                        $user = new User($pdo, "yassin", "elk", "elk", 'elk', "p");
-                        $u = $user->findetd($_SESSION["email"]);
-                    }
-                    ?>
+                  
 
                     <div class="pcard-banner"></div>
                     <div class="pcard-body">
@@ -821,6 +86,13 @@ if (isset($_POST['generate_bio'])) {
                                     $us = $user->find($_SESSION["email"]);
                                 }
                                 ?>
+                                  <?php if (isset($_SESSION["email"])) {
+                        require_once __DIR__ . '/../../model/user.php';
+                        require_once __DIR__ . '/../../core/Database.php';
+                        $user = new User($pdo, "yassin", "elk", "elk", 'elk', "p");
+                        $u = $user->findetd($_SESSION["email"]);
+                    }
+                    ?>
                                 <img src="src\assets\images\<?php if (isset($us["photo_url"]) && $us["photo_url"] != "") {
                                                                 echo $us["photo_url"];
                                                             } ?>" alt="">
@@ -832,8 +104,12 @@ if (isset($_POST['generate_bio'])) {
                             <div style="margin-top:10px"><span class="pro-pill">PRO</span></div>
                         </div>
                         <div style="margin-top:12px">
-                            <p style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;line-height:1.2" id="pvName"><?= $u['nom'] . " " . $u['prenom'] ?></p>
-                            <p style="font-size:12px;color:var(--muted2);margin-top:3px" id="pvRole"><?= $u['filiere'] ?></p>
+                            <p style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;line-height:1.2" id="pvName"><?php if (isset($us) ) {
+                                
+                            echo $u['nom'] . " " . $u['prenom'] ;}?></p>
+                            <p style="font-size:12px;color:var(--muted2);margin-top:3px" id="pvRole"><?php if (isset($us) ) {
+                                
+                                echo $u['filiere'] ;}?></p>
                         </div>
                         <div style="margin-top:10px;display:flex;flex-direction:column;gap:5px">
                             <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)">
@@ -841,26 +117,44 @@ if (isset($_POST['generate_bio'])) {
                                     <path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" />
                                     <circle cx="12" cy="11" r="3" />
                                 </svg>
-                                <span id="pvLoc"><?= $u['ville'] ?></span>
+                                <span id="pvLoc"><?php if (isset($us) ) {
+                                    
+                                    echo $u['ville'] ;}?></span>
                             </div>
                             <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)">
                                 <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                     <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                                </svg>
-                                <span id="pvUni"><?= $u['etablissement'] ?></span>
+                                    </svg>
+                                <span id="pvUni"><?php if (isset($us) ) {
+                                    
+                                    echo $u['etablissement'];} ?></span>
                             </div>
                         </div>
-                        <p style="font-size:11px;color:var(--muted2);font-style:italic;margin-top:11px;line-height:1.65" id="pvBio"><?= $u['bio'] ?></p>
+                        <p style="font-size:11px;color:var(--muted2);font-style:italic;margin-top:11px;line-height:1.65" id="pvBio"><?php if (isset($us) ) {
+                            
+                        echo $u['bio'] ;}?></p>
                         <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:11px" id="pvChips">
-                            <span class="chip">Python</span>
-                            <span class="chip">React</span>
-                            <span class="chip">TensorFlow</span>
+                            <?php if (isset($u)) {
+                              if ($u['skills_json']==null) {
+                               $skills=[];
+                            }else $skills = json_decode($u['skills_json'], true);
+                            foreach ($skills as $key => $v) { ?>
+                                <span class="chip"><?php 
+                                    
+                                    echo $v["skill_name"];?></span>
+                            <?php } 
+                            }
+                           ?>
+
+
+
                         </div>
-                        <button class="btn-p" style="width:100%;margin-top:16px;font-size:12.5px;padding:10px">View Full Portfolio</button>
+                        <a href="index.php?action=profile">
+                            <button class="btn-p" style="width:100%;margin-top:16px;font-size:12.5px;padding:10px">View Full Portfolio</button>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Info box -->
                 <div class="ibox">
                     <svg fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
@@ -872,16 +166,13 @@ if (isset($_POST['generate_bio'])) {
                 </div>
             </div>
 
-            <!-- ─── RIGHT CONTENT ─── -->
             <div style="display:flex;flex-direction:column;gap:20px">
 
-                <!-- Page header -->
                 <div>
                     <h1 style="font-size:31px;font-weight:800;letter-spacing:-.6px;line-height:1.1">Profile Settings</h1>
                     <p style="font-size:14px;color:var(--muted2);margin-top:7px">Manage your public information and academic credentials.</p>
                 </div>
 
-                <!-- ─── PROFILE IMAGE ─── -->
                 <div class="card">
                     <div class="cp">
                         <div class="sec-hd">
@@ -933,7 +224,6 @@ if (isset($_POST['generate_bio'])) {
                     </div>
                 </div>
 
-                <!-- ─── PERSONAL INFO ─── -->
                 <div class="card">
                     <div class="cp">
                         <div class="sec-hd">
@@ -956,15 +246,27 @@ if (isset($_POST['generate_bio'])) {
 
                                 <div>
                                     <label class="flabel">Full Name</label>
-                                    <input class="finp" name="fName" id="fName" value="<?= $us['nom'] . " " . $us['prenom'] ?>" oninput="sync()" placeholder="Your full name" />
+                                    <input class="finp" name="fName" id="fName" value="<?php if (isset($us)) {
+                                        
+                                        echo $us['nom'] . " " . $us['prenom'] ;}?>" oninput="sync()" placeholder="Your full name" />
                                 </div>
                                 <div>
                                     <label class="flabel">Education sector</label>
-                                    <input class="finp" name="fRole" id="fRole" value="<?= $us['filiere'] ?>" oninput="sync()" placeholder="e.g. CS Student" />
+                                    <input class="finp" name="fRole" id="fRole" value="<?php if (isset($us)) {
+                                        
+                                        echo $us['filiere'];} ?>" oninput="sync()" placeholder="e.g. CS Student" />
                                 </div>
-                                <div style="grid-column:1/-1">
+                                <div>
                                     <label class="flabel">University / Institution</label>
-                                    <input class="finp" name="fUni" id="fUni" value="<?= $us['etablissement'] ?>" oninput="sync()" placeholder="Your institution" />
+                                    <input class="finp" name="fUni" id="fUni" value="<?php if (isset($us)) {
+                                        
+                                        echo $us['etablissement'];} ?>" oninput="sync()" placeholder="Your institution" />
+                                </div>
+                                <div>
+                                    <label class="flabel">City</label>
+                                    <input class="finp" name="ville" id="fUni" value="<?php if (isset($us)) {
+                                        
+                                        echo $us['ville'];} ?>" oninput="sync()" placeholder="Your institution" />
                                 </div>
 
                                 <div style="grid-column:1/-1">
@@ -974,13 +276,22 @@ if (isset($_POST['generate_bio'])) {
                                             </td>
                                             <td>
                                                 <div id="bio-launcher" style="margin-left: 640px   ; cursor: pointer;" onclick="toggleBioPanel()">
-                                                  <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M15.9087 3.87352C16.4681 3.31421 17.2266 3 18.0176 3C18.4093 3 18.7971 3.07714 19.1589 3.22702C19.5208 3.3769 19.8495 3.59658 20.1265 3.87352C20.4034 4.15046 20.6231 4.47924 20.773 4.84108C20.9229 5.20292 21 5.59074 21 5.98239C21 6.37404 20.9229 6.76186 20.773 7.1237C20.6231 7.48554 20.4034 7.81432 20.1265 8.09126L19.0231 9.19466C18.6326 9.58519 17.9994 9.58519 17.6089 9.19467L14.8053 6.39114C14.4148 6.00062 14.4148 5.36745 14.8053 4.97693L15.9087 3.87352ZM13.3911 7.80536C13.0006 7.41483 12.3674 7.41483 11.9769 7.80536L5.01084 14.7714C4.37004 15.4122 3.91545 16.2151 3.69566 17.0943L3.02986 19.7575C2.94467 20.0982 3.04452 20.4587 3.2929 20.7071C3.54128 20.9555 3.90177 21.0553 4.24254 20.9701L6.90572 20.3043C7.78488 20.0846 8.58778 19.63 9.22857 18.9892L16.1946 12.0231C16.5852 11.6326 16.5852 10.9994 16.1946 10.6089L13.3911 7.80536Z" fill="#ffffff"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 20C12 19.4477 12.4477 19 13 19L20 19C20.5523 19 21 19.4477 21 20C21 20.5523 20.5523 21 20 21L13 21C12.4477 21 12 20.5523 12 20Z" fill="#ffffff"></path> </g></svg>
+                                                    <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                                        <g id="SVGRepo_iconCarrier">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.9087 3.87352C16.4681 3.31421 17.2266 3 18.0176 3C18.4093 3 18.7971 3.07714 19.1589 3.22702C19.5208 3.3769 19.8495 3.59658 20.1265 3.87352C20.4034 4.15046 20.6231 4.47924 20.773 4.84108C20.9229 5.20292 21 5.59074 21 5.98239C21 6.37404 20.9229 6.76186 20.773 7.1237C20.6231 7.48554 20.4034 7.81432 20.1265 8.09126L19.0231 9.19466C18.6326 9.58519 17.9994 9.58519 17.6089 9.19467L14.8053 6.39114C14.4148 6.00062 14.4148 5.36745 14.8053 4.97693L15.9087 3.87352ZM13.3911 7.80536C13.0006 7.41483 12.3674 7.41483 11.9769 7.80536L5.01084 14.7714C4.37004 15.4122 3.91545 16.2151 3.69566 17.0943L3.02986 19.7575C2.94467 20.0982 3.04452 20.4587 3.2929 20.7071C3.54128 20.9555 3.90177 21.0553 4.24254 20.9701L6.90572 20.3043C7.78488 20.0846 8.58778 19.63 9.22857 18.9892L16.1946 12.0231C16.5852 11.6326 16.5852 10.9994 16.1946 10.6089L13.3911 7.80536Z" fill="#ffffff"></path>
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 20C12 19.4477 12.4477 19 13 19L20 19C20.5523 19 21 19.4477 21 20C21 20.5523 20.5523 21 20 21L13 21C12.4477 21 12 20.5523 12 20Z" fill="#ffffff"></path>
+                                                        </g>
+                                                    </svg>
                                                 </div>
                                             </td>
                                         </tr>
                                     </table>
 
-                                    <textarea class="finp" id="bio-result" name="Bio" rows="4" oninput="sync()" placeholder="Tell recruiters about yourself..."><?= $us['bio'] ?></textarea>
+                                    <textarea class="finp" id="bio-result" name="Bio" rows="4" oninput="sync()" placeholder="Tell recruiters about yourself..."><?php if (isset($us)) {
+                                        
+                                    echo $us['bio'] ;}?></textarea>
                                 </div>
                             </div>
 
@@ -998,7 +309,6 @@ if (isset($_POST['generate_bio'])) {
 
 
 
-                <!-- Bio Panel -->
                 <div id="bio-panel"
                     style="position:fixed; bottom:165px; right:28px; z-index:9996;
             width:340px; background:#0D0F14;
@@ -1010,7 +320,6 @@ if (isset($_POST['generate_bio'])) {
             pointer-events:none;
             transition:opacity 0.25s ease, transform 0.25s ease;">
 
-                    <!-- Header -->
                     <div style="display:flex; align-items:center; justify-content:space-between;
                 padding:13px 16px; background:#161920;
                 border-bottom:1px solid rgba(255,255,255,0.07);">
@@ -1019,7 +328,6 @@ if (isset($_POST['generate_bio'])) {
                             style="cursor:pointer; color:#9CA3AF; font-size:18px; line-height:1; padding:0 4px;">×</span>
                     </div>
 
-                    <!-- Body -->
                     <div style="padding:14px; display:flex; flex-direction:column; gap:8px;">
 
                         <input type="text" id="bio-input" name="skill"
@@ -1054,7 +362,6 @@ if (isset($_POST['generate_bio'])) {
                 <div id="bio-result" style="display:none; margin-top:10px; padding:12px; background:#f0f4ff; border-radius:10px; font-size:14px; color:#1a1a2e;"></div>
 
 
-                <!-- ─── CV UPLOAD ─── -->
                 <div class="card">
                     <div class="cp">
                         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
@@ -1093,7 +400,6 @@ if (isset($_POST['generate_bio'])) {
 
 
 
-                            <!-- Progress area -->
                             <div id="progArea" style="display:none;margin-top:18px">
                                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:9px">
                                     <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted2)">
@@ -1135,7 +441,6 @@ if (isset($_POST['generate_bio'])) {
 
                 </div>
 
-                <!-- ─── SOCIAL LINKS ─── -->
                 <div class="card">
                     <div class="cp">
                         <div class="sec-hd">
@@ -1186,7 +491,6 @@ if (isset($_POST['generate_bio'])) {
         </div>
     </div>
 
-    <!-- TOAST -->
     <div class="toast" id="toastEl">
         <div class="t-icon">
             <svg fill="currentColor" viewBox="0 0 20 20">
@@ -1195,159 +499,7 @@ if (isset($_POST['generate_bio'])) {
         </div>
         <span id="toastTxt">Saved!</span>
     </div>
-    <script>
-        const D = {
-            name: 'Alex Rivers',
-            role: 'Computer Science Student',
-            uni: 'Tech Institute of Technology',
-            bio: 'Passionate about AI and full-stack development. Looking for research opportunities in LLMs.'
-        };
 
-        function sync() {
-            document.getElementById('pvName').textContent = document.getElementById('fName').value || 'Your Name';
-            document.getElementById('pvRole').textContent = document.getElementById('fRole').value || 'Your Role';
-            document.getElementById('pvUni').textContent = document.getElementById('fUni').value || 'Your Institution';
-            const b = document.getElementById('fBio').value;
-            document.getElementById('pvBio').textContent = b ? `"${b}"` : '';
-        }
-
-        function onImg(e) {
-            const f = e.target.files[0];
-            if (!f) return;
-            const r = new FileReader();
-            r.onload = ev => {
-                const img = `<img src="${ev.target.result}" style="width:100%;height:100%;object-fit:cover"/>`;
-                document.getElementById('avDisp').innerHTML = img;
-                document.getElementById('pvAv').innerHTML = img;
-                document.getElementById('navAv').innerHTML = img;
-            };
-            r.readAsDataURL(f);
-        }
-
-        function rmImg() {
-            const s1 = `<svg width="34" height="34" fill="none" stroke="var(--muted)" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>`;
-            const s2 = `<svg width="24" height="24" fill="none" stroke="var(--muted)" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>`;
-            const s3 = `<svg width="16" height="16" fill="none" stroke="var(--muted2)" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>`;
-            document.getElementById('avDisp').innerHTML = s1;
-            document.getElementById('pvAv').innerHTML = s2;
-            document.getElementById('navAv').innerHTML = s3;
-            document.getElementById('imgIn').value = '';
-        }
-
-        function onDrop(e) {
-            e.preventDefault();
-            document.getElementById('dz').classList.remove('drag');
-            if (e.dataTransfer.files[0]) beginProg();
-        }
-
-        function beginProg() {
-            document.getElementById('progArea').style.display = 'block';
-            document.getElementById('shareBtn').style.display = 'none';
-            let p = 0;
-            const iv = setInterval(() => {
-                p += Math.floor(Math.random() * 7) + 3;
-                if (p >= 100) {
-                    p = 100;
-                    clearInterval(iv);
-                    endProg();
-                }
-                document.getElementById('pPct').textContent = p + '%';
-                document.getElementById('pFill').style.width = p + '%';
-            }, 80);
-
-
-        }
-
-        function endProg() {
-            document.getElementById('sd2').className = 'sdot sdot-done';
-            document.getElementById('sl2').style.color = 'var(--green)';
-            document.getElementById('sd3').className = 'sdot sdot-done';
-            document.getElementById('sl3').style.color = 'var(--green)';
-            document.getElementById('sl3').textContent = 'DONE';
-            document.getElementById('progTxt').textContent = 'Extraction complete';
-            document.getElementById('spinSvg').style.animation = 'none';
-            document.getElementById('spinSvg').style.stroke = 'var(--green)';
-            document.getElementById('shareBtn').style.display = 'flex';
-            toast('CV processed — skills extracted!');
-        }
-
-        function discard() {
-            document.getElementById('fName').value = D.name;
-            document.getElementById('fRole').value = D.role;
-            document.getElementById('fUni').value = D.uni;
-            document.getElementById('fBio').value = D.bio;
-            sync();
-            toast('Changes discarded.');
-        }
-
-        function toast(msg) {
-            const el = document.getElementById('toastEl');
-            document.getElementById('toastTxt').textContent = msg;
-            el.classList.add('show');
-            setTimeout(() => el.classList.remove('show'), 3200);
-        }
-    </script>
 </body>
 
 </html>
-
-
-
-
-
-
-<script>
-    function generateBio() {
-        const raw = document.getElementById('bio-input').value.trim();
-        const parts = raw.split(',').map(s => s.trim());
-        const name = parts[0] || '';
-        const school = parts[1] || '';
-        const skills = parts[2] || '';
-
-        if (!name) {
-            alert('Enter at least your name');
-            return;
-        }
-
-        document.getElementById('bio-result').style.display = 'block';
-        document.getElementById('bio-result').textContent = '⏳ Generating...';
-
-        const fd = new FormData();
-        fd.append('generate_bio', '1');
-        fd.append('name', name);
-        fd.append('school', school);
-        fd.append('skills', skills);
-
-        fetch(window.location.href, { // ← هنا التغيير
-                method: 'POST',
-                body: fd
-            })
-            .then(r => r.json())
-            .then(data => {
-                document.getElementById('bio-result').textContent = data.status === 'success' ?
-                    data.bio : '❌ ' + data.message;
-            })
-            .catch(() => {
-                document.getElementById('bio-result').textContent = '❌ Server error';
-            });
-    }
-
-    function toggleBioPanel() {
-        const panel = document.getElementById('bio-panel');
-        const launcher = document.getElementById('bio-launcher');
-        const visible = panel.style.opacity === '1';
-
-        if (visible) {
-            panel.style.opacity = '0';
-            panel.style.transform = 'translateY(16px) scale(0.97)';
-            panel.style.pointerEvents = 'none';
-            launcher.style.transform = 'scale(1)';
-        } else {
-            panel.style.opacity = '1';
-            panel.style.transform = 'translateY(0) scale(1)';
-            panel.style.pointerEvents = 'all';
-            launcher.style.transform = 'scale(0.92)';
-            document.getElementById('bio-input').focus();
-        }
-    }
-</script>

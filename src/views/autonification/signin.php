@@ -31,95 +31,11 @@
       },
     }
   </script>
+        <script src="src/assets/js/js_signin.js"></script>
+     <link rel="stylesheet" href="src/assets/css/style_singin.css">
 
-  <style>
-    body { background: #0d1117; }
- .input-li {
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-      outline: none;
-      width: 100%;
-      padding: 10px 0;
-      color: #fff;
-      font-size: 14px;
-      font-family: 'DM Sans', sans-serif;
-      transition: border-color 0.2s;
-    }
 
-    .input-li:focus {
-      border-bottom-color: red;
-    }
-    .gradient-text {
-      background: linear-gradient(90deg, #4f8fff 0%, #9b6bff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .left-glow::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 80% 50% at 50% 5%, rgba(30,80,210,0.25) 0%, transparent 65%);
-      pointer-events: none;
-      border-radius: inherit;
-    }
-
-    .input-line {
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid rgba(255,255,255,0.15);
-      outline: none;
-      width: 100%;
-      padding: 10px 0;
-      color: #fff;
-      font-size: 14px;
-      font-family: 'DM Sans', sans-serif;
-      transition: border-color 0.2s;
-    }
-    .input-line::placeholder { color: rgba(255,255,255,0.35); }
-    .input-line:focus { border-bottom-color: rgba(100,160,255,0.6); }
-
-    .btn-signin {
-      background: linear-gradient(90deg, #4f8fff 0%, #8b5cf6 100%);
-      transition: opacity 0.2s, transform 0.15s;
-    }
-    .btn-signin:hover  { opacity: 0.9; }
-    .btn-signin:active { transform: scale(0.98); }
-
-    .role-tab.active {
-      background: linear-gradient(90deg, #4f8fff, #7c5cf6);
-      color: #fff;
-    }
-    .role-tab {
-      cursor: pointer;
-      padding: 8px 20px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.45);
-      transition: all 0.2s;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .role-tab:not(.active):hover { color: rgba(255,255,255,0.75); }
-
-    .role-tabs-wrap {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.07);
-    }
-
-    .btn-outline {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.10);
-      transition: background 0.2s;
-    }
-    .btn-outline:hover { background: rgba(255,255,255,0.08); }
-
-    .card-border { border: 1px solid rgba(255,255,255,0.06); }
-
-    input[type="checkbox"] { accent-color: #4f8fff; }
-  </style>
+ 
 </head>
 
 <body class="min-h-screen flex items-center justify-center font-dm p-5">
@@ -244,37 +160,7 @@
     </form>
   </div>
 
-  <script>
-    function setRole(el) {
-      document.getElementById("rols").style.border = "none"
-      document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
-      el.classList.add('active');
-      document.getElementById("role").value = el.innerText
-    }
-      // validation inpute
-    function validation() {
-
-      let pas = document.getElementById("pwd");
-      let email = document.getElementById("email");
-      let role = document.getElementById("role");
-      if (role.value == "") {
-        document.getElementById("rols").style.borderColor = "red"
-
-      } else if (email.value == "") {
-        email.focus()
-        email.className = "input-li"
-      } else if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email.value)) {
-        email.focus()
-        email.className = "input-li"
-      } else if (pas.value =="") {
-        pas.focus()
-        pas.className = "input-li"
-      }else {
-        document.getElementById("form").submit()
-      }
-
-    }
-  </script>
+ 
 
 </body>
 </html>
